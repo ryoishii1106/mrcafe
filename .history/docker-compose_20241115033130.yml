@@ -28,8 +28,9 @@ services:
       - SECRET_KEY_BASE=your_secret_key_base
     ports:
       - "3000:3000"
+    environment:
+      - SECRET_KEY_BASE=YOUR_SECRET_KEY_BASE
     depends_on:
-      db:
-        condition: service_healthy
+      - db
     stdin_open: true
     tty: true
