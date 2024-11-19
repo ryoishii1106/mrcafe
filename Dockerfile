@@ -41,6 +41,17 @@ RUN bundle config set --local frozen false && \
   rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
   bundle exec bootsnap precompile --gemfile
 
+# Node.js
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+  apt-get install -y nodejs
+
+# Yarn
+# 1行目は外部パッケージをインストールするために、HTTPSに対応したapt methodsをインストールする処理
+RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+  echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+  apt-get update && apt-get install yarn
+
 # Copy application code
 COPY . .
 
