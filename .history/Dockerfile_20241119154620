@@ -43,7 +43,7 @@ RUN chmod 666 Gemfile.lock && \
   bundle exec bootsnap precompile --gemfile
 
 # Node.js
-RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
   apt-get install -y nodejs
 
 # Yarn
